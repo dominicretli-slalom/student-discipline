@@ -4,9 +4,6 @@ import {StudentDisciplineComponent} from './student-discipline.component';
 import {BrowserModule, By} from "@angular/platform-browser";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {StudentDisciplineService} from "../student-discipline.service";
-import {Student} from "../student";
-import {StudentDetailsComponent} from "../student-details/student-details.component";
-import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {of} from "rxjs";
 
 describe('DetentionReportComponentComponent', () => {
@@ -63,15 +60,17 @@ describe('DetentionReportComponentComponent', () => {
     expect(component.form.value).toEqual(expectedFormValue);
   });
 
+  describe('ngOnInit', ()=> {
+    it('should call getStudents from the StudentDisciplineService and set the response to the components students array property', ()=> {
+      const expectedStudents = [student1, student2];
+      expect(component.students).toEqual(expectedStudents);
+      expect(studentDisciplineServiceSpy.getStudents).toHaveBeenCalled();
+    });
+  });
+
   it('should display student select element', () => {
     const studentSelect = fixture.debugElement.query(By.css('#student'));
     expect(studentSelect).toBeTruthy();
-  });
-
-  it('should call getStudents from the StudentDisciplineService and set the response to the components students array property', ()=> {
-    const expectedStudents = [student1, student2];
-    expect(component.students).toEqual(expectedStudents);
-    expect(studentDisciplineServiceSpy.getStudents).toHaveBeenCalled();
   });
 
   it('should display option for each student in the student dropdown', ()=> {

@@ -21,16 +21,8 @@ export class StudentDisciplineComponent implements OnInit {
 
   ngOnInit(): void {
     this.studentDisciplineService.getStudents().subscribe(response => {
-
-      //if response has an error
-      //displayError(response.error)
-
-      // else
       this.students = response;
-    })
-
-    //call the student service
-    //save the response in a students propety
+    });
   }
 
 }
