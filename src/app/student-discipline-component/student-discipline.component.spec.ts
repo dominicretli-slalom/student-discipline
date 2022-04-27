@@ -71,9 +71,11 @@ describe('DetentionReportComponentComponent', () => {
   it('should call getStudents from the StudentDisciplineService and set the response to the components students array property', ()=> {
     const expectedStudents = [student1, student2];
     expect(component.students).toEqual(expectedStudents);
+    expect(studentDisciplineServiceSpy.getStudents).toHaveBeenCalled();
   });
 
   it('should display option for each student in the student dropdown', ()=> {
+    component.students = [student1, student2];
     const studentSelect = fixture.debugElement.query(By.css('#student'));
     const options = studentSelect.queryAll(By.css('option'));
 
