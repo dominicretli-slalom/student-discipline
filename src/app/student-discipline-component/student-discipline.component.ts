@@ -9,7 +9,8 @@ import {StudentDisciplineService} from "../student-discipline.service";
   styleUrls: ['./student-discipline.component.css']
 })
 export class StudentDisciplineComponent implements OnInit {
-  students: Student[];
+  students$ = this.studentDisciplineService.getStudents();
+  punishments: string[];
   form: FormGroup = this.formBuilder.group({
     student: [''],
     violation: [''],
@@ -20,9 +21,12 @@ export class StudentDisciplineComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.studentDisciplineService.getStudents().subscribe(response => {
-      this.students = response;
-    });
+    // this.studentDisciplineService.getStudents().subscribe(response => {
+    //   this.students = response;
+    // });
+    this.studentDisciplineService.getPunishments().subscribe(response => {
+      this.punishments = response;
+    })
   }
 
 }
